@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SUPPLY AI - Sua Conta</title>
+  <link rel="icon" type="image/png" href="log.png">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #000000, #1c1c1c);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    .voltar {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #ff6f00;
+      color: #000;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .voltar:hover {
+      background-color: #ffa040;
+    }
+
+    .container {
+      background-color: #121212;
+      padding: 2rem 2.5rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 111, 0, 0.4);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .container h1 {
+      color: #ff6f00;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+
+    .container p {
+      font-size: 1.1rem;
+      margin: 0.6rem 0;
+    }
+
+    .btn {
+      width: 100%;
+      background-color: #f65b08;
+      color: #000;
+      border: none;
+      padding: 0.9rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 1.2rem;
+    }
+
+    .btn:hover {
+      background-color: #f65b08;
+    }
+
+    .link-redefinir {
+      display: block;
+      color: #f65b08;
+      text-decoration: none;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+
+    .link-redefinir:hover {
+      text-decoration: underline;
+    }
+
+    /* Modal base */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-content {
+      background-color: #1e1e1e;
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(255, 111, 0, 0.4);
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .modal-content h2 {
+      color: #ff6f00;
+      margin-bottom: 1rem;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .modal-content .btn.cancelar {
+      background-color: #555;
+      color: white;
+      margin-top: 0.5rem;
+    }
+
+    .modal-content .btn.cancelar:hover {
+      background-color: #777;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Notificação */
+    #notificacao {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #4caf50;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      font-weight: bold;
+      display: none;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="voltar" onclick="window.location.href='home.html'">← Início</button>
+
+  <div class="container">
+    <h1>Minha Conta</h1>
+    <p><strong>Nome:</strong> <span id="nome"></span></p>
+    <p><strong>Email:</strong> <span id="email"></span></p>
+
+    <a class="link-redefinir" href="#" id="redefinir-senha">Redefinir Senha</a>
+
+    <button class="btn" id="btn-sair">Sair da Conta</button>
+  </div>
+
+  <!-- Modal redefinir senha -->
+  <div id="modal-senha" class="modal">
+    <div class="modal-content">
+      <h2>Redefinir Senha</h2>
+      <input type="password" id="nova-senha" placeholder="Digite a nova senha">
+      <button id="confirmar-senha" class="btn">Confirmar</button>
+      <button id="cancelar-senha" class="btn cancelar">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- Modal confirmação saída -->
+  <div id="modal-sair" class="modal">
+    <div class="modal-content">
+      <h2>Tem certeza que deseja sair da conta?</h2>
+      <button id="confirmar-sair" class="btn">Sim, sair</button>
+      <button id="cancelar-sair" class="btn cancelar">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- Notificação de sucesso -->
+  <div id="notificacao">Senha atualizada com sucesso!</div>
+
+  <script>
+    const emailLogado = localStorage.getItem('usuarioLogado');
+    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || {};
+
+    if (!emailLogado || !usuarios[emailLogado]) {
+      window.location.href = 'login.html';
+    } else {
+      const usuario = usuarios[emailLogado];
+      document.getElementById('nome').textContent = usuario.nome;
+      document.getElementById('email').textContent = emailLogado;
+    }
+
+    // Modal redefinir senha
+    document.getElementById('redefinir-senha').addEventListener('click', () => {
+      document.getElementById('modal-senha').style.display = 'flex';
+    });
+
+    document.getElementById('confirmar-senha').addEventListener('click', () => {
+      const novaSenha = document.getElementById('nova-senha').value;
+      if (novaSenha.trim() !== '') {
+        usuarios[emailLogado].senha = novaSenha;
+        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+        document.getElementById('modal-senha').style.display = 'none';
+        document.getElementById('nova-senha').value = '';
+
+        const notif = document.getElementById('notificacao');
+        notif.style.display = 'block';
+        setTimeout(() => {
+          notif.style.display = 'none';
+        }, 3000);
+      }
+    });
+
+    document.getElementById('cancelar-senha').addEventListener('click', () => {
+      document.getElementById('modal-senha').style.display = 'none';
+      document.getElementById('nova-senha').value = '';
+    });
+
+    // Modal sair da conta
+    document.getElementById('btn-sair').addEventListener('click', () => {
+      document.getElementById('modal-sair').style.display = 'flex';
+    });
+
+    document.getElementById('confirmar-sair').addEventListener('click', () => {
+      localStorage.removeItem('usuarioLogado');
+      window.location.href = 'login.html';
+    });
+
+    document.getElementById('cancelar-sair').addEventListener('click', () => {
+      document.getElementById('modal-sair').style.display = 'none';
+    });
+  </script>
+
+</body>
+</html>
