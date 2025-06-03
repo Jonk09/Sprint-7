@@ -4,102 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SUPPLY AI - Alertas e Previsões</title>
-  <link rel="icon" type="image/png" href="log.png">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      background: linear-gradient(to right, #000000, #000000);
-      color: #f5f5f5;
-    }
-
-    header {
-      background-color: #000000;
-      color: #ffffff;
-      padding: 1.5rem;
-      text-align: center;
-    }
-
-    /* Logo no canto superior esquerdo */
-    .logo {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      width: 93px; /* Aumento no tamanho da logo */
-      height: auto; /* Mantém a proporção da logo */
-    }
-    
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      background-color: #f65b08;
-      padding: 0.75rem;
-    }
-
-    nav a {
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    .container {
-      padding: 2rem;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .section {
-      margin-bottom: 2rem;
-      background: #1c1c1c;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(255, 111, 0, 0.4);
-    }
-
-    h2 {
-      color: #ff6f00;
-      margin-bottom: 1rem;
-    }
-
-    .alert {
-      background-color: #ff6f00;
-      color: #000;
-      padding: 1rem;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-      font-weight: bold;
-    }
-
-    .forecast {
-      background-color: #262626;
-      border-left: 5px solid #ffa040;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border-radius: 8px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: #ff6f00;
-      color: #000;
-      margin-top: 2rem;
-    }
-  </style>
+  <link rel="icon" type="../img/logo.png" href="../img/log.png" />
+  <link rel="stylesheet" href="../css/alertas.css" />
 </head>
 <body>
   <header>
-    <img src="log.png" alt="Logo SUPPLY AI" class="logo">
+    <img src="../img/log.png" alt="Logo SUPPLY AI" class="logo" />
     <h1>SUPPLY AI</h1>
     <p>Alertas e Previsões Inteligentes</p>
   </header>
@@ -134,7 +44,7 @@
 
     <section class="section">
       <h2>💡 Recomendações Inteligentes</h2>
-      <ul style="line-height: 1.8;">
+      <ul class="recommendations">
         <li>✔ Automatize pedidos com base em alertas de estoque crítico.</li>
         <li>✔ Mapeie fornecedores alternativos para insumos prioritários.</li>
         <li>✔ Integre sensores IoT para monitorar níveis de estoque em tempo real.</li>
@@ -146,5 +56,7 @@
   <footer>
     <p>&copy; 2025 supplyai. Todos os direitos reservados.</p>
   </footer>
+
+  <script src="../js/alertas.js"></script>
 </body>
 </html>
