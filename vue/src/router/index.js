@@ -2,11 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router';
 import login from '../components/login.vue'
 
 import alertas from '../components/alertas.vue';
-import bemvindo from '../components/bemvindo.vue';  
+ import bemvindo from '../components/bemvindo.vue';  
 import cadastro from '../components/cadastro.vue'; 
 import conexao from '../components/conexao.vue'; 
-import contato from '../components/contato.vue'; 
-import decisoes from '../components/decisoes.vue'; 
+import contato from '../components/contato.vue'; import decisoes from '../components/decisoes.vue'; 
 import escalabilidade from '../components/escalabilidade.vue'; 
 import estoque from '../components/estoque.vue'; 
 import home from '../components/home.vue'; 
@@ -27,8 +26,7 @@ const routes = [
     {path: '/escalabilidade', name: 'escalabilidade', component: escalabilidade},
     {path: '/estoque', name: 'estoque', component: estoque},
     {path: '/home', name: 'home', component: home},
-    {path: '/integracao', name: 'integracao', component: integracao
-    },
+    {path: '/integracao', name: 'integracao', component: integracao},
     {path: '/reducao', name: 'reducao', component: reducao},
     {path: '/sobre', name: 'sobre', component: sobre},
     {path: '/suaconta', name: 'suaconta', component: suaconta},

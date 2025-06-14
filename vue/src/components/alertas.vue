@@ -8,13 +8,13 @@
 
     <!-- nav FORA da div.container -->
     <nav>
-      <a href="#">Início</a>
-      <a href="#">Sobre</a>
-      <a href="#">Contato</a>
-      <a href="#">Sua conta</a>
+      <a href="/home">Início</a>
+      <a href="/sobre">Sobre</a>
+      <a href="/contato">Contato</a>
+      <a href="suaconta">Sua conta</a>
     </nav>
 
-    <div class="container">
+    <div class="">
       <section class="section">
         <h2>⚠️ Alertas de Insumos Críticos</h2>
         <div class="alert">

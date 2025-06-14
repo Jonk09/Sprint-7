@@ -7,8 +7,8 @@
     </header>
 
     <nav>
+      <RouterLink to="/home">Inicio</RouterLink>
       <RouterLink to="/sobre">Sobre</RouterLink>
-      <RouterLink to="/contato">Contato</RouterLink>
       <RouterLink to="/suaconta">Sua conta</RouterLink>
     </nav>
 

@@ -12,19 +12,17 @@
       <RouterLink to="/suaconta">Sua conta</RouterLink>
     </nav>
 
-    <div class="">
-      <section id="sobre" class="section">
-        <section id="beneficios" class="section">
-          <div class="btn-group">
-            <button @click="goTo('alertas')">📢 Alertas e Previsões Inteligentes</button>
-            <button @click="goTo('redução')">💰 Redução de Custos</button>
-            <button @click="goTo('decisões')">📊 Decisões com Dados</button>
-            <button @click="goTo('estoque')">📦 Estoque em Tempo Real</button>
-            <button @click="goTo('escalabilidade')">🚀 Escalabilidade</button>
-            <button @click="goTo('integracao')">🔌 Integração com Sistemas</button>
-            <button @click="goTo('conexao')">🤝 Conexão entre Empresas</button>
-          </div>
-        </section>
+    <div class="container">
+      <section id="beneficios" class="section">
+        <div class="btn-group">
+          <button @click="goTo('alertas')">📢 Alertas e Previsões Inteligentes</button>
+          <button @click="goTo('reducao')">💰 Redução de Custos</button>
+          <button @click="goTo('decisoes')">📊 Decisões com Dados</button>
+          <button @click="goTo('estoque')">📦 Estoque em Tempo Real</button>
+          <button @click="goTo('escalabilidade')">🚀 Escalabilidade</button>
+          <button @click="goTo('integracao')">🔌 Integração com Sistemas</button>
+          <button @click="goTo('conexao')">🤝 Conexão entre Empresas</button>
+        </div>
       </section>
     </div>
 
@@ -35,14 +33,21 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+function goTo(page) {
+  router.push(`/${page}`)
+}
 
 function logout() {
-  localStorage.removeItem('usuario')
+  localStorage.removeItem('usuarioLogado')
   router.push('/suaconta')
 }
 </script>
 
-<style>
+<style scoped>
 * {
   margin: 0;
   padding: 0;
@@ -77,6 +82,7 @@ nav {
   gap: 2rem;
   background-color: #f65b08;
   padding: 0.75rem;
+  align-items: center;
 }
 
 nav a {
@@ -87,6 +93,20 @@ nav a {
 
 nav a:hover {
   text-decoration: underline;
+}
+
+.btn-logout {
+  background-color: #ff6f00;
+  color: #000;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-logout:hover {
+  background-color: #ffa040;
 }
 
 .container {

@@ -7,9 +7,9 @@
     </header>
 
     <nav>
-      <a href="#">Início</a>
-      <a href="#">Contato</a>
-      <a href="#">Sua conta</a>
+      <a href="/home">Início</a>
+      <a href="/contato">Contato</a>
+      <a href="suaconta">Sua conta</a>
     </nav>
 
     <div class="">
@@ -58,7 +58,13 @@
 </template>
 
 <script>
-// Código JS pode ser adicionado aqui no futuro
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+function goTo(page) {
+  router.push(`/${page}`)
+}
 </script>
 
 <style>
