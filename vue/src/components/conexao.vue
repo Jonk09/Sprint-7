@@ -7,7 +7,7 @@
     </header>
 
     <nav>
-      <RouterLink to="/inicio">Início</RouterLink>
+      <RouterLink to="/home">Início</RouterLink>
       <RouterLink to="/sobre">Sobre</RouterLink>
       <RouterLink to="/contato">Contato</RouterLink>
       <RouterLink to="/suaconta">Sua conta</RouterLink>

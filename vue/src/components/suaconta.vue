@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div class="pagina">
+    <!-- Botão Voltar -->
     <button class="voltar" @click="voltarInicio">← Início</button>
 
-    <div class="">
+    <!-- Área da Conta -->
+    <div class="container">
       <h1>Minha Conta</h1>
       <p><strong>Nome:</strong> {{ nome }}</p>
       <p><strong>Email:</strong> {{ email }}</p>
@@ -54,13 +56,19 @@ onMounted(() => {
   const emailLogado = localStorage.getItem('usuarioLogado')
   const usuarios = JSON.parse(localStorage.getItem('usuarios')) || {}
 
+  console.log('Usuário Logado:', emailLogado)
+  console.log('Usuários cadastrados:', usuarios)
+
   if (!emailLogado || !usuarios[emailLogado]) {
-    router.push('/login')  // Redireciona para a tela de login
+    console.warn('Redirecionando para login...')
+    router.push('/')
   } else {
     nome.value = usuarios[emailLogado].nome
     email.value = emailLogado
   }
 })
+
+  
 
 function abrirModalSenha() {
   modalSenha.value = true
@@ -104,26 +112,24 @@ function mostrarNotificacao(texto, cor) {
 }
 
 function voltarInicio() {
-  router.push('/inicio')
+  router.push('/home')
 }
 </script>
 
 <style scoped>
-body {
-  margin: 0;
-  padding: 0;
+.pagina {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(to right, #000000, #1c1c1c);
   color: white;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   flex-direction: column;
+  align-items: center;
+  padding-top: 60px;
 }
 
 .voltar {
-  position: absolute;
+  position: fixed;
   top: 20px;
   left: 20px;
   background-color: #ff6f00;
@@ -135,6 +141,7 @@ body {
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s ease;
+  z-index: 1000;
 }
 
 .voltar:hover {
@@ -203,7 +210,6 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 999;
-  animation: fadeIn 0.3s ease;
 }
 
 .modal-content {
@@ -240,11 +246,6 @@ body {
   background-color: #777;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
 #notificacao {
   position: fixed;
   bottom: 30px;
@@ -253,7 +254,7 @@ body {
   padding: 1rem 1.5rem;
   border-radius: 10px;
   font-weight: bold;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   z-index: 1000;
 }
 </style>
