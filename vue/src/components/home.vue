@@ -7,21 +7,21 @@
     </header>
 
     <nav>
-      <RouterLink to="/sobre">Sobre</RouterLink>
-      <RouterLink to="/contato">Contato</RouterLink>
-      <RouterLink to="/suaconta">Sua conta</RouterLink>
+      <a href="/sobre.html">Sobre</a>
+      <a href="/contato.html">Contato</a>
+      <a href="/suaconta.html">Sua conta</a>
     </nav>
 
     <div class="container">
       <section id="beneficios" class="section">
         <div class="btn-group">
-          <button @click="goTo('alertas')">📢 Alertas e Previsões Inteligentes</button>
-          <button @click="goTo('reducao')">💰 Redução de Custos</button>
-          <button @click="goTo('decisoes')">📊 Decisões com Dados</button>
-          <button @click="goTo('estoque')">📦 Estoque em Tempo Real</button>
-          <button @click="goTo('escalabilidade')">🚀 Escalabilidade</button>
-          <button @click="goTo('integracao')">🔌 Integração com Sistemas</button>
-          <button @click="goTo('conexao')">🤝 Conexão entre Empresas</button>
+          <button @click="goTo('alertas.html')">📢 Alertas e Previsões Inteligentes</button>
+          <button @click="goTo('reducao.html')">💰 Redução de Custos</button>
+          <button @click="goTo('decisoes.html')">📊 Decisões com Dados</button>
+          <button @click="goTo('estoque.html')">📦 Estoque em Tempo Real</button>
+          <button @click="goTo('escalabilidade.html')">🚀 Escalabilidade</button>
+          <button @click="goTo('integracao.html')">🔌 Integração com Sistemas</button>
+          <button @click="goTo('conexao.html')">🤝 Conexão entre Empresas</button>
         </div>
       </section>
     </div>
@@ -33,17 +33,12 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
-
-function goTo(page) {
-  router.push(`/${page}`)
-}
-
 function logout() {
   localStorage.removeItem('usuarioLogado')
-  router.push('/suaconta')
+}
+
+function goTo(page) {
+  window.location.href = page
 }
 </script>
 

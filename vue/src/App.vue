@@ -1,12 +1,13 @@
 <template>
-<home />
+    <Home />
 </template>
 
 <script setup>
-import home from './views/home.vue'
+import Home from '@/components/Home.vue'
 
 </script>
 
 <style>
 
 </style>
+
