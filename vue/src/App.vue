@@ -1,14 +1,11 @@
 <template>
     <div>
-        <!-- <bemvindo/>
-        <router-view/> -->
-      <conexao/>
+     <router-view></router-view>
     </div>
 </template>
 
 <script setup>
-import conexao from '@/components/conexao.vue'
-import bemvindo from '@/components/bemvindo.vue'
+
 
 </script>
 

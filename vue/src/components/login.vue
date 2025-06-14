@@ -1,20 +1,17 @@
 <template>
   <div class="login-container">
-    <h1>SUPPLY AI</h1>
-
-    <form @submit.prevent="cadastrar">
-      <input v-model="nome" type="text" placeholder="Nome Completo" required />
-      <input v-model="email" type="email" placeholder="Email" required />
-      <input v-model="senha" type="password" placeholder="Criar Senha" required />
-
-      <RouterLink class="link-login" to="/">Já tem uma conta? Entrar</RouterLink>
-
-      <button class="btn-login" type="submit">Cadastrar</button>
-
-      <p id="mensagem-sucesso" v-if="cadastroSucesso">✅ Cadastro realizado com sucesso!</p>
-    </form>
     <img src="@/assets/log.png" alt="Logo SUPPLY AI" class="logo" />
-    
+    <h1>SUPPLY AI</h1>
+    <form @submit.prevent="fazerLogin" novalidate>
+      <input v-model="email" type="email" placeholder="Email" required autocomplete="username" />
+      <input v-model="senha" type="password" placeholder="Senha" required autocomplete="current-password" />
+      
+      <p v-if="erro" id="mensagem-erro" role="alert" aria-live="assertive">Email ou senha incorretos!</p>
+      <p v-if="sucesso" id="mensagem-sucesso" role="alert" aria-live="assertive">Login bem-sucedido! Salvando seus dados com segurança...</p>
+
+      <RouterLink class="link-login" to="/cadastro">Não tem uma conta? Cadastre-se</RouterLink>
+      <button class="btn-login" type="submit">Entrar</button>
+    </form>
   </div>
 </template>
 
@@ -22,47 +19,38 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-const nome = ref('')
+const router = useRouter()
 const email = ref('')
 const senha = ref('')
-const cadastroSucesso = ref(false)
+const erro = ref(false)
+const sucesso = ref(false)
 
-const router = useRouter()
-
-const cadastrar = () => {
+function fazerLogin() {
   const usuarios = JSON.parse(localStorage.getItem('usuarios')) || {}
   const emailLower = email.value.toLowerCase()
 
-  if (usuarios[emailLower]) {
-    alert('Este e-mail já está cadastrado.')
-    return
+  if (usuarios[emailLower] && usuarios[emailLower].senha === senha.value) {
+    localStorage.setItem('usuarioLogado', emailLower)
+    erro.value = false
+    sucesso.value = true
+
+    setTimeout(() => {
+      router.push('/bemvindo')
+    }, 2000)
+  } else {
+    sucesso.value = false
+    erro.value = true
   }
-
-  usuarios[emailLower] = {
-    nome: nome.value,
-    senha: senha.value
-  }
-
-  localStorage.setItem('usuarios', JSON.stringify(usuarios))
-  cadastroSucesso.value = true
-
-  setTimeout(() => {
-    router.push('/')
-  }, 2000)
 }
 </script>
 
-<style>
-
+<style scoped>
 body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(to right, #000000, #1c1c1c);
   color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
 }
 
@@ -82,6 +70,8 @@ body {
   max-width: 400px;
   width: 100%;
   text-align: center;
+  margin: auto;
+  margin-top: 10vh;
 }
 
 .login-container h1 {
@@ -135,9 +125,15 @@ body {
   text-decoration: underline;
 }
 
-#mensagem-sucesso {
-  color: #4caf50;
-  font-weight: bold;
+#mensagem-erro {
+  color: #ff0000;
   margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+#mensagem-sucesso {
+  color: #00ff08;
+  margin-top: 1rem;
+  font-size: 0.95rem;
 }
 </style>

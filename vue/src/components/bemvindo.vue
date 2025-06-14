@@ -1,8 +1,8 @@
 <template>
-  <div class="">
+  <div class="container">
     <h1>Bem-vindo(a), <span>{{ nomeUsuario }}</span>!</h1>
     <p>Você está logado no SUPPLY AI.</p>
-    <button class="btn-logout" @click="entrar">Entrar</button>
+    <button class="btn-logout" @click="sair">Entrar</button>
   </div>
 </template>
 
@@ -13,8 +13,9 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const nomeUsuario = ref('')
 
-const entrar = () => {
-  router.push({path: '/inicio'}) // Rota de destino ao clicar
+function sair() {
+  localStorage.removeItem('usuarioLogado')
+  router.push('/home')
 }
 
 onMounted(() => {
@@ -22,28 +23,26 @@ onMounted(() => {
   const usuarios = JSON.parse(localStorage.getItem('usuarios'))
 
   if (!email || !usuarios?.[email]) {
-    router.push('/login')
+    router.push('/bemvindo')
   } else {
     nomeUsuario.value = usuarios[email].nome
   }
 })
 </script>
 
-<style>
+<style scoped>
 .container {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #1c1c1c;
+  background-color: #000000;
   color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   height: 100vh;
   width: 100vw;
-
   text-align: center;
 }
 
@@ -61,9 +60,11 @@ h1 {
   font-size: 1.1rem;
   cursor: pointer;
   font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .btn-logout:hover {
-  background-color: #f65b08;
+  background-color: #d14f05;
+  color: #fff;
 }
 </style>
