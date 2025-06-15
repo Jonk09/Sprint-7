@@ -7,21 +7,21 @@
     </header>
 
     <nav>
-      <a href="/sobre.html">Sobre</a>
-      <a href="/contato.html">Contato</a>
-      <a href="/suaconta.html">Sua conta</a>
+      <a href="/sobre.vue">Sobre</a>
+      <a href="/contato.vue">Contato</a>
+      <a href="/suaconta.vue">Sua conta</a>
     </nav>
 
     <div class="container">
       <section id="beneficios" class="section">
         <div class="btn-group">
-          <button @click="goTo('alertas.html')">📢 Alertas e Previsões Inteligentes</button>
-          <button @click="goTo('reducao.html')">💰 Redução de Custos</button>
-          <button @click="goTo('decisoes.html')">📊 Decisões com Dados</button>
-          <button @click="goTo('estoque.html')">📦 Estoque em Tempo Real</button>
-          <button @click="goTo('escalabilidade.html')">🚀 Escalabilidade</button>
-          <button @click="goTo('integracao.html')">🔌 Integração com Sistemas</button>
-          <button @click="goTo('conexao.html')">🤝 Conexão entre Empresas</button>
+          <button @click="goTo('alertas.vue')">📢 Alertas e Previsões Inteligentes</button>
+          <button @click="goTo('reducao.vue')">💰 Redução de Custos</button>
+          <button @click="goTo('decisoes.vue')">📊 Decisões com Dados</button>
+          <button @click="goTo('estoque.vue')">📦 Estoque em Tempo Real</button>
+          <button @click="goTo('escalabilidade.vue')">🚀 Escalabilidade</button>
+          <button @click="goTo('integracao.vue')">🔌 Integração com Sistemas</button>
+          <button @click="goTo('conexao.vue')">🤝 Conexão entre Empresas</button>
         </div>
       </section>
     </div>
@@ -42,7 +42,7 @@ function goTo(page) {
 }
 </script>
 
-<style scoped>
+<style>
 * {
   margin: 0;
   padding: 0;

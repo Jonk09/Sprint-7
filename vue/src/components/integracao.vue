@@ -7,10 +7,10 @@
     </header>
 
     <nav>
-      <RouterLink to="/home">Início</RouterLink>
-      <RouterLink to="/sobre">Sobre</RouterLink>
-      <RouterLink to="/contato">Contato</RouterLink>
-      <RouterLink to="/suaconta">Sua conta</RouterLink>
+      <a href="home.html">Início</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="contato.html">Contato</a>
+      <a href="suaconta.html">Sua conta</a>
     </nav>
 
     <div class="">
@@ -57,10 +57,10 @@
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router'
+// Nenhum import necessário
 </script>
 
-<style scoped>
+<style>
 * {
   margin: 0;
   padding: 0;

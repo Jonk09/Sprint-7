@@ -7,12 +7,12 @@
     </header>
 
     <nav>
-      <RouterLink to="/home">Inicio</RouterLink>
-      <RouterLink to="/sobre">Sobre</RouterLink>
-      <RouterLink to="/suaconta">Sua conta</RouterLink>
+      <a href="/home.html">Início</a>
+      <a href="/sobre.html">Sobre</a>
+      <a href="/suaconta.html">Sua conta</a>
     </nav>
 
-    <div class="">
+    <div class="container">
       <section id="chat-container">
         <div id="chat-messages" ref="chatMessages">
           <div
@@ -46,24 +46,23 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
+import { ref, nextTick } from 'vue'
 
-const userInput = ref('');
-const messages = ref([]);
-const chatMessages = ref(null);
+const userInput = ref('')
+const messages = ref([])
+const chatMessages = ref(null)
 
 function addMessage(text, type) {
-  messages.value.push({ text, type });
+  messages.value.push({ text, type })
   nextTick(() => {
     if (chatMessages.value) {
-      chatMessages.value.scrollTop = chatMessages.value.scrollHeight;
+      chatMessages.value.scrollTop = chatMessages.value.scrollHeight
     }
-  });
+  })
 }
 
 function botResponse(input) {
-  input = input.toLowerCase().trim();
+  input = input.toLowerCase().trim()
 
   const responses = {
     'quantas unidades de polímero xz-100 ainda restam?': 'Restam 12 unidades.',
@@ -86,27 +85,27 @@ function botResponse(input) {
     'o que melhora com a conexão?': 'O planejamento.',
     'o que as empresas trocam?': 'Informações.',
     'o que é reduzido?': 'A falta de matéria-prima.'
-  };
+  }
 
-  return responses[input] || 'Desculpe, ainda estou aprendendo. Pode tentar outra pergunta?';
+  return responses[input] || 'Desculpe, ainda estou aprendendo. Pode tentar outra pergunta?'
 }
 
 function sendMessage() {
-  if (userInput.value.trim() === '') return;
+  if (userInput.value.trim() === '') return
 
-  addMessage(userInput.value, 'user');
-  const response = botResponse(userInput.value);
+  addMessage(userInput.value, 'user')
+  const response = botResponse(userInput.value)
   setTimeout(() => {
-    addMessage(response, 'bot');
-  }, 600);
-  userInput.value = '';
+    addMessage(response, 'bot')
+  }, 600)
+  userInput.value = ''
 }
 
 function openWhatsApp() {
-  const phone = '5581985067954';
-  const message = encodeURIComponent('Olá, gostaria de saber mais sobre os produtos da SUPPLY AI.');
-  const url = `https://wa.me/${phone}?text=${message}`;
-  window.open(url, '_blank');
+  const phone = '5581985067954'
+  const message = encodeURIComponent('Olá, gostaria de saber mais sobre os produtos da SUPPLY AI.')
+  const url = `https://wa.me/${phone}?text=${message}`
+  window.open(url, '_blank')
 }
 </script>
 

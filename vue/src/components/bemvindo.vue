@@ -2,35 +2,49 @@
   <div class="container">
     <h1>Bem-vindo(a), <span>{{ nomeUsuario }}</span>!</h1>
     <p>Você está logado no SUPPLY AI.</p>
-    <button class="btn-logout" @click="sair">Entrar</button>
+    <button class="btn-entrar" @click="irParaHome">Entrar</button>
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
 
-const router = useRouter()
 const nomeUsuario = ref('')
-
-function sair() {
-  localStorage.removeItem('usuarioLogado')
-  router.push('/home')
-}
 
 onMounted(() => {
   const email = localStorage.getItem('usuarioLogado')
   const usuarios = JSON.parse(localStorage.getItem('usuarios'))
 
-  if (!email || !usuarios?.[email]) {
-    router.push('/bemvindo')
-  } else {
+  if (email && usuarios?.[email]) {
     nomeUsuario.value = usuarios[email].nome
+  } else {
+    nomeUsuario.value = 'Visitante'
   }
 })
+
+function irParaHome() {
+  const email = localStorage.getItem('usuarioLogado')
+  const usuarios = JSON.parse(localStorage.getItem('usuarios'))
+
+  if (email && usuarios?.[email]) {
+    window.location.href = 'home.html'
+  } else {
+    alert('Por favor, faça login antes de continuar.')
+    window.location.href = 'index.html'
+  }
+}
 </script>
 
-<style scoped>
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
 .container {
   margin: 0;
   padding: 0;
@@ -50,7 +64,7 @@ h1 {
   color: #f65b08;
 }
 
-.btn-logout {
+.btn-entrar {
   margin-top: 2rem;
   background-color: #f65b08;
   color: #000;
@@ -63,7 +77,7 @@ h1 {
   transition: background-color 0.3s ease;
 }
 
-.btn-logout:hover {
+.btn-entrar:hover {
   background-color: #d14f05;
   color: #fff;
 }

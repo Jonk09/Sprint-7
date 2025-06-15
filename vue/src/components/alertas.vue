@@ -65,7 +65,7 @@ import logo from '@/assets/log.png'
 
 </script>
 
-<style>
+<style scoped>
 * {
   margin: 0;
   padding: 0;

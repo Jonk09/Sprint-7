@@ -7,10 +7,10 @@
     </header>
 
     <nav>
-      <RouterLink to="/home">Início</RouterLink>
-      <RouterLink to="/sobre">Sobre</RouterLink>
-      <RouterLink to="/contato">Contato</RouterLink>
-      <RouterLink to="/suaconta">Sua conta</RouterLink>
+      <a href="home.html">Início</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="contato.html">Contato</a>
+      <a href="suaconta.html">Sua conta</a>
     </nav>
 
     <div class="container">
@@ -63,7 +63,6 @@
 
 <script setup>
 import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
 
 const stockItems = ref([
   { name: 'Aço Inox', quantity: 120, maxQuantity: 600 },
@@ -85,7 +84,7 @@ function getLevelClass(item) {
 }
 </script>
 
-<style scoped>
+<style>
 * {
   margin: 0;
   padding: 0;

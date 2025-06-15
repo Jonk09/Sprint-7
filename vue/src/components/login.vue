@@ -2,6 +2,7 @@
   <div class="login-container">
     <img src="@/assets/log.png" alt="Logo SUPPLY AI" class="logo" />
     <h1>SUPPLY AI</h1>
+
     <form @submit.prevent="fazerLogin" novalidate>
       <input v-model="email" type="email" placeholder="Email" required autocomplete="username" />
       <input v-model="senha" type="password" placeholder="Senha" required autocomplete="current-password" />
@@ -9,7 +10,10 @@
       <p v-if="erro" id="mensagem-erro" role="alert" aria-live="assertive">Email ou senha incorretos!</p>
       <p v-if="sucesso" id="mensagem-sucesso" role="alert" aria-live="assertive">Login bem-sucedido! Salvando seus dados com segurança...</p>
 
-      <RouterLink class="link-login" to="/cadastro">Não tem uma conta? Cadastre-se</RouterLink>
+      <!-- Link de cadastro com função -->
+      <a class="link-login" href="#" @click.prevent="irParaCadastro">Não tem uma conta? Cadastre-se</a>
+
+      <!-- Botão de login -->
       <button class="btn-login" type="submit">Entrar</button>
     </form>
   </div>
@@ -17,9 +21,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 
-const router = useRouter()
 const email = ref('')
 const senha = ref('')
 const erro = ref(false)
@@ -35,16 +37,20 @@ function fazerLogin() {
     sucesso.value = true
 
     setTimeout(() => {
-      router.push('/bemvindo')
+      window.location.href = 'bemvindo.vue'   // Redireciona para tela de sucesso
     }, 2000)
   } else {
     sucesso.value = false
     erro.value = true
   }
 }
+
+function irParaCadastro() {
+  window.location.href = '/cadastro.vue'  // Redireciona para tela de cadastro
+}
 </script>
 
-<style scoped>
+<style>
 body {
   margin: 0;
   padding: 0;

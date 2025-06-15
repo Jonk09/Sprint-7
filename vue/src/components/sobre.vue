@@ -9,7 +9,7 @@
     <nav>
       <a href="/home">Início</a>
       <a href="/contato">Contato</a>
-      <a href="suaconta">Sua conta</a>
+      <a href="/suaconta">Sua conta</a>
     </nav>
 
     <div class="">
